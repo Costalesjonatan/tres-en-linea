@@ -23,6 +23,11 @@ export default function Board() {
     }
   }
 
+  function handleRestartClick() {
+    setSquares(Array(9).fill(null))
+    setActualPlayer(1)
+  }
+
   return (
     <>
      <div className="board-row">
@@ -40,6 +45,9 @@ export default function Board() {
         <Square value={squares[7]} onSquareClick={() => handleClick(7)}/>
         <Square value={squares[8]} onSquareClick={() => handleClick(8)}/>
       </div>
+      <div>
+        <Restart onRestartClick={handleRestartClick} />
+      </div>
     </>
   );
 }
@@ -51,6 +59,16 @@ function Square({value, onSquareClick}) {
       onClick={onSquareClick}
     >
       {value}
+    </button> 
+  );
+}
+
+function Restart({onRestartClick}) {
+  return (
+    <button
+      onClick={onRestartClick}
+    >
+      Restart
     </button> 
   );
 }
