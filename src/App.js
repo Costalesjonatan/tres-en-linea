@@ -19,5 +19,15 @@ function Row({ valueOne, valueTwo, valueThree }) {
 }
 
 function Square({ number }) {
-  return ( <button className="square">{ number }</button> );
+  function handleClick() {
+    console.log('Hiciste un click!')
+  }
+  return ( 
+    <button 
+      className="square"
+      onClick={handleClick}
+    >
+      { number }
+    </button> 
+  );
 }
