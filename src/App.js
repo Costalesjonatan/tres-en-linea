@@ -16,8 +16,6 @@ function Board() {
   const [winner, setWinner] = useState("null")
   const [winnerSquares, setWinnerSquares] = useState(Array(3).fill(null))
 
-  console.log(boardState)
-
   function handleClick(index) {
     if (squares[index] == null) {
       if (boardState == "PLAY") {
@@ -37,18 +35,15 @@ function Board() {
 
         if (actualWinner[1] !== "NONE") {
           setBoardState("WINNER")
-        } else if (nextSquares.reduce((count, square) => square === null ? count += 1 : count = count) == 0) {
+        } else if (nextSquares.filter(square => square === null).length === 0) {
           setBoardState("COMPLETE")
+          console.log("Tablero completo")
         }
 
         setWinnerSquares(actualWinner[0])
         setWinner(actualWinner[1])
         setSquares(nextSquares);
       }
-    }
-
-    if (boardState === "COMPLETE") {
-      console.log()
     }
   }
 
@@ -59,6 +54,8 @@ function Board() {
     setWinner(null)
     setWinnerSquares(Array(3).fill(null))
   }
+
+  console.log(boardState)
 
   return (
     <div className='container'>
@@ -81,6 +78,7 @@ function Board() {
         </div>
       </div>
       <ActualWinnerView winner={winner} />
+      <NoWinnerView actualBoardState={boardState} />
       <Restart onRestartClick={handleRestartClick} />
     </div>
   );
@@ -121,7 +119,6 @@ function ActualPlayerView({ actuaPlayer }) {
 
 function ActualWinnerView({ winner }) {
   if (winner !== "NONE" && winner !== null) {
-    console.log(winner)
     return (
       <div className='inner-content'>
         <p>
@@ -143,6 +140,21 @@ function ActualWinnerView({ winner }) {
         </p>
       </div>
   );
+}
+
+function NoWinnerView({ actualBoardState }) {
+  if (actualBoardState === "COMPLETE") {
+    return (
+      <div className='inner-content'>
+        <p>
+          Empate!
+        </p>
+        <p>
+          Si quieren jugar de nuevo presionen el botón restart...
+        </p>
+      </div>
+    );
+  }
 }
 
 const privateFunctionGetWinner = (squares) => {
