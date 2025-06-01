@@ -1,7 +1,14 @@
 import { useState } from 'react';
 
-export default function Board() {
+export default function Game() {
+  return (
+    <>
+      <Board />
+    </>
+  );
+}
 
+function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null))
   const [actualPlayer, setActualPlayer] = useState(1)
 
@@ -29,26 +36,26 @@ export default function Board() {
   }
 
   return (
-    <>
-     <div className="board-row">
-        <Square value={squares[0]} onSquareClick={() => handleClick(0)}/>
-        <Square value={squares[1]} onSquareClick={() => handleClick(1)}/>
-        <Square value={squares[2]} onSquareClick={() => handleClick(2)}/>
+    <div className='container'>
+      <div className='content'>
+        <div className="board-row">
+          <Square value={squares[0]} onSquareClick={() => handleClick(0)}/>
+          <Square value={squares[1]} onSquareClick={() => handleClick(1)}/>
+          <Square value={squares[2]} onSquareClick={() => handleClick(2)}/>
+        </div>
+        <div className="board-row">
+          <Square value={squares[3]} onSquareClick={() => handleClick(3)}/>
+          <Square value={squares[4]} onSquareClick={() => handleClick(4)}/>
+         <Square value={squares[5]} onSquareClick={() => handleClick(5)}/>
+       </div>
+       <div className="board-row">
+         <Square value={squares[6]} onSquareClick={() => handleClick(6)}/>
+         <Square value={squares[7]} onSquareClick={() => handleClick(7)}/>
+         <Square value={squares[8]} onSquareClick={() => handleClick(8)}/>
+        </div>
       </div>
-      <div className="board-row">
-        <Square value={squares[3]} onSquareClick={() => handleClick(3)}/>
-        <Square value={squares[4]} onSquareClick={() => handleClick(4)}/>
-        <Square value={squares[5]} onSquareClick={() => handleClick(5)}/>
-      </div>
-      <div className="board-row">
-        <Square value={squares[6]} onSquareClick={() => handleClick(6)}/>
-        <Square value={squares[7]} onSquareClick={() => handleClick(7)}/>
-        <Square value={squares[8]} onSquareClick={() => handleClick(8)}/>
-      </div>
-      <div>
-        <Restart onRestartClick={handleRestartClick} />
-      </div>
-    </>
+      <Restart onRestartClick={handleRestartClick}/>
+    </div>
   );
 }
 
@@ -65,10 +72,12 @@ function Square({value, onSquareClick}) {
 
 function Restart({onRestartClick}) {
   return (
-    <button
-      onClick={onRestartClick}
-    >
-      Restart
-    </button> 
+    <div className='restart-button'>
+      <button
+        onClick={onRestartClick}
+      >
+        Restart
+      </button> 
+    </div>
   );
 }
