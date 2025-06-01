@@ -1,33 +1,38 @@
+import { useState } from 'react';
+
 export default function Board() {
   return (
     <>
-      <Row valueOne={1} valueTwo={2} valueThree={3}/>
-      <Row valueOne={4} valueTwo={5} valueThree={6}/>
-      <Row valueOne={7} valueTwo={8} valueThree={9}/>
+     <Row />
+     <Row />
+     <Row />
     </>
   );
 }
 
-function Row({ valueOne, valueTwo, valueThree }) {
+function Row() {
   return (
       <div className="board-row">
-        <Square number={valueOne}/>
-        <Square number={valueTwo}/>
-        <Square number={valueThree}/>
+        <Square />
+        <Square />
+        <Square />
       </div>
   );
 }
 
-function Square({ number }) {
+function Square() {
+
+  const [value, setValue] = useState(null)
+  
   function handleClick() {
-    console.log('Hiciste un click!')
+    setValue('X')
   }
   return ( 
     <button 
       className="square"
       onClick={handleClick}
     >
-      { number }
+      {value}
     </button> 
   );
 }
